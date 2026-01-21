@@ -25,12 +25,7 @@ router.get(
   notesController.searchNotes
 );
 
-router.get(
-  '/:id',
-  param('id').isInt({ min: 1 }),
-  validate,
-  notesController.getNote
-);
+router.get('/:id', param('id').isInt({ min: 1 }), validate, notesController.getNote);
 
 router.put(
   '/:id',
@@ -42,19 +37,9 @@ router.put(
   notesController.updateNote
 );
 
-router.delete(
-  '/:id',
-  param('id').isInt({ min: 1 }),
-  validate,
-  notesController.deleteNote
-);
+router.delete('/:id', param('id').isInt({ min: 1 }), validate, notesController.deleteNote);
 
-router.get(
-  '/:id/versions',
-  param('id').isInt({ min: 1 }),
-  validate,
-  notesController.listVersions
-);
+router.get('/:id/versions', param('id').isInt({ min: 1 }), validate, notesController.listVersions);
 
 router.post(
   '/:id/versions/:versionId/revert',

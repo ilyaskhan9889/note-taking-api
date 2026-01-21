@@ -4,13 +4,16 @@ import { Note, NoteVersion, sequelize } from '../models/index.js';
 async function createNote({ userId, title, content }) {
   return sequelize.transaction(async (transaction) => {
     const note = await Note.create({ userId, title, content }, { transaction });
-    await NoteVersion.create({
-      noteId: note.id,
-      version: note.version,
-      title: note.title,
-      content: note.content,
-      createdBy: userId
-    }, { transaction });
+    await NoteVersion.create(
+      {
+        noteId: note.id,
+        version: note.version,
+        title: note.title,
+        content: note.content,
+        createdBy: userId
+      },
+      { transaction }
+    );
     return note;
   });
 }
@@ -42,13 +45,16 @@ async function updateNote({ userId, noteId, title, content, version }) {
       throw err;
     }
 
-    await NoteVersion.create({
-      noteId: note.id,
-      version: note.version,
-      title: note.title,
-      content: note.content,
-      createdBy: userId
-    }, { transaction });
+    await NoteVersion.create(
+      {
+        noteId: note.id,
+        version: note.version,
+        title: note.title,
+        content: note.content,
+        createdBy: userId
+      },
+      { transaction }
+    );
 
     return { note };
   });
@@ -82,13 +88,16 @@ async function revertNote({ userId, noteId, versionId }) {
       throw err;
     }
 
-    await NoteVersion.create({
-      noteId: note.id,
-      version: note.version,
-      title: note.title,
-      content: note.content,
-      createdBy: userId
-    }, { transaction });
+    await NoteVersion.create(
+      {
+        noteId: note.id,
+        version: note.version,
+        title: note.title,
+        content: note.content,
+        createdBy: userId
+      },
+      { transaction }
+    );
 
     return { note };
   });
@@ -101,18 +110,10 @@ async function searchNotes({ userId, query }) {
 
   return Note.findAll({
     where: {
-      [Op.and]: [
-        { userId },
-        matchLiteral
-      ]
+      [Op.and]: [{ userId }, matchLiteral]
     },
     order: [['updatedAt', 'DESC']]
   });
 }
 
-export {
-  createNote,
-  updateNote,
-  revertNote,
-  searchNotes
-};
+export { createNote, updateNote, revertNote, searchNotes };

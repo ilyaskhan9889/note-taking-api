@@ -3,6 +3,7 @@
 A Note Taking API built with Express, MySQL (Sequelize), and Redis caching. Supports version history, optimistic concurrency control, full-text search, and soft deletes.
 
 ## Features
+
 - User registration/login with JWT auth
 - Notes with version history and revert support
 - Optimistic locking on updates (version field)
@@ -12,6 +13,7 @@ A Note Taking API built with Express, MySQL (Sequelize), and Redis caching. Supp
 - Docker/Docker Compose setup
 
 ## Quick Start (Docker)
+
 1. Copy environment file and update secrets:
    ```bash
    cp .env.example .env
@@ -23,6 +25,7 @@ A Note Taking API built with Express, MySQL (Sequelize), and Redis caching. Supp
 3. API available at `http://localhost:3000`.
 
 ## Local Development (without Docker)
+
 1. Install dependencies:
    ```bash
    npm install
@@ -34,11 +37,13 @@ A Note Taking API built with Express, MySQL (Sequelize), and Redis caching. Supp
    ```
 
 ## Authentication
+
 - Register: `POST /auth/register`
 - Login: `POST /auth/login`
 - Use the returned token in `Authorization: Bearer <token>`
 
 ## Notes API
+
 - Create: `POST /notes`
 - List: `GET /notes`
 - Search: `GET /notes/search?q=keyword`
@@ -49,6 +54,7 @@ A Note Taking API built with Express, MySQL (Sequelize), and Redis caching. Supp
 - Revert: `POST /notes/:id/versions/:versionId/revert`
 
 ### Update Example (Optimistic Locking)
+
 ```json
 {
   "title": "Updated title",
@@ -56,14 +62,18 @@ A Note Taking API built with Express, MySQL (Sequelize), and Redis caching. Supp
   "version": 2
 }
 ```
+
 If the version is stale, the API responds with `409` and the `currentVersion`.
 
 ## Caching
+
 - `GET /notes` and `GET /notes/:id` responses are cached in Redis.
 - Cache is invalidated on create, update, delete, and revert.
 
 ## Testing
+
 No automated tests are included. Use Postman/curl to verify endpoints.
 
 ## Docs
+
 - Technical analysis: `docs/TECHNICAL_ANALYSIS.md`

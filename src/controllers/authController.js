@@ -36,7 +36,4 @@ async function login(req, res) {
   return res.json({ accessToken: token });
 }
 
-export {
-  register,
-  login
-};
+export { register, login };
