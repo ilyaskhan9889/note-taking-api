@@ -10,6 +10,7 @@ coverage
 *.log
 .vscode
 .idea
-
+.eslintcache
+.pnpm-store
 # Docker volumes (optional)
 **/db_data

@@ -17,6 +17,7 @@ function authMiddleware(req, res, next) {
     req.user = { id: payload.sub, email: payload.email };
     return next();
   } catch (err) {
+    console.error('Token verification error:', err);
     return res.status(401).json({ message: 'Invalid or expired token' });
   }
 }
